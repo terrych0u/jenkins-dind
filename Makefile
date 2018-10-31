@@ -22,19 +22,19 @@ help: ## List targets & descriptions
 
 
 .PHONY: dir
-dir: ## create directory for jenkins-master or single jenkins containers mount, help to backup file to local.
+dir: ## Create directory for jenkins-master or single jenkins containers mount, help to backup file to local.
 	@sh scripts/dir.sh master
 
 
 
 .PHONY: dir-slave
-dir-slave: ## create directory for jenkins-slave containers mount, help to backup file to local.
+dir-slave: ## Create directory for jenkins-slave containers mount, help to backup file to local.
 	@sh scripts/dir.sh slave
 
 
 
 .PHONY: build
-build: ## create the customized docker images for jenkins master and slave
+build: ## Build the customized docker images for jenkins master and slave
 	@cd $(dirname $0)
 	@docker build -t ${MASTER_IMAGE} .
 	@docker tag ${MASTER_IMAGE}:latest ${MASTER_IMAGE}:${MASTER_VERSION}
@@ -44,8 +44,9 @@ build: ## create the customized docker images for jenkins master and slave
 	@docker push ${SLAVE_IMAGE}:${SLAVE_VERSION}
 
 
+
 .PHONY: build-master
-build-master: ## create the customized docker images for jenkins master 
+build-master: ## Build the customized docker images for jenkins master 
 	@cd $(dirname $0)
 	@docker build -t ${MASTER_IMAGE} .
 	@docker tag ${MASTER_IMAGE}:latest ${MASTER_IMAGE}:${MASTER_VERSION}
@@ -54,7 +55,7 @@ build-master: ## create the customized docker images for jenkins master
 
 
 .PHONY: build-slave
-build-slave: ## create the customized docker images for jenkins slave with ssh
+build-slave: ## Build the customized docker images for jenkins slave with ssh
 	@cd $(dirname $0)
 	@docker build -t ${SLAVE_IMAGE} -f Dockerfile.slave .
 	@docker tag ${SLAVE_IMAGE}:latest ${SLAVE_IMAGE}:${SLAVE_VERSION}
@@ -63,7 +64,7 @@ build-slave: ## create the customized docker images for jenkins slave with ssh
 
 
 .PHONY: master
-run: dir ## run standalone jenkins
+run: dir ## Run standalone jenkins
 	@docker run -d -v ${MASTER_DIR}:/var/jenkins_home \
 					-v /var/run/docker.sock:/var/run/docker.sock \
 					-v ${DOCKER}:/usr/bin/docker \
@@ -73,7 +74,7 @@ run: dir ## run standalone jenkins
 
 
 .PHONY: slave
-slave: dir-slave ## run a slave jenkins
+slave: dir-slave ## Run a slave jenkins
 	@docker run -d -v ${SLAVE_DIR}:/var/jenkins_home \
 					--name jenkins-slave --rm \
 					jenkinsci/ssh-slave "${PUBLIC_KEY}"
@@ -81,7 +82,7 @@ slave: dir-slave ## run a slave jenkins
 
 
 .PHONY: run
-master-slave: dir dir-slave ## run master + slave mode for jenkins
+master-slave: dir dir-slave ## Run master + slave mode for jenkins
 	@docker run -d -v ${MASTER_DIR}:/var/jenkins_home \
 					-v /var/run/docker.sock:/var/run/docker.sock \
 					-v ${DOCKER}:/usr/bin/docker \
@@ -95,12 +96,13 @@ master-slave: dir dir-slave ## run master + slave mode for jenkins
 
 
 .PHONY: clean
-clean: ## stop the jenkins docker containers
+clean: ## Stop the jenkins docker containers
 	@docker kill ${DOCKER_LISTS}
 
 
+
 .PHONY: clean-all
-clean-all: ## stop the jenkins docker containers and clean all related data, images...etc
+clean-all: ## Stop the jenkins docker containers and clean all related data, images...etc
 	@docker kill ${DOCKER_LISTS}
 	@docker rmi ${DOCKER_IMAGES_LISTS}
 	@docker volume rm ${DOCKER_VOLUME}
