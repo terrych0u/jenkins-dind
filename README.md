@@ -41,7 +41,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
 ```
 
 ### jenkins-ssh-slave
-This image prodive ssh with docker in docker as Jenkins slave.
+This image provide ssh with docker in docker as Jenkins slave.
 
 it's a Docker In Docker version (you can use Docker inside) based on official Docker 18.09 DinD image, and use master connects this slave by ssh tunnel as below :
 
