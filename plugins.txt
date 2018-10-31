@@ -1,0 +1,3 @@
+python:latest
+thinBackup:latest
+config-file-provider:latest
