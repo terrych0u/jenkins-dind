@@ -77,7 +77,7 @@ run: dir ## Run standalone jenkins
 slave: dir-slave ## Run a slave jenkins
 	@docker run -d -v ${SLAVE_DIR}:/var/jenkins_home \
 					--name jenkins-slave --rm \
-					jenkinsci/ssh-slave "${PUBLIC_KEY}"
+					${SLAVE_IMAGE}:${SLAVE_VERSION} "${PUBLIC_KEY}"
 
 
 
@@ -91,7 +91,7 @@ master-slave: dir dir-slave ## Run master + slave mode for jenkins
 
 	@docker run -d -v ${SLAVE_DIR}:/var/jenkins_home \
 					--name jenkins-slave --rm \
-					jenkinsci/ssh-slave "${PUBLIC_KEY}"
+					${SLAVE_IMAGE}:${SLAVE_VERSION} "${PUBLIC_KEY}"
 
 
 
