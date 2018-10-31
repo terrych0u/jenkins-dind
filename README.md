@@ -1,5 +1,5 @@
 # jenkins-dind
-This project is for quick build an Jenkins lab environment on local laptop, to help learning Jenkins, and it contain 2 parts： 
+This project is for quick build an Jenkins lab environment on local laptop, to help learning Jenkins, and it contain 2 parts： 
 
 ```
 jenkins-dind
@@ -35,7 +35,7 @@ Base on official jenkins/jenkins:alpine-lts images
 
 ```bash
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
-            -v $(which docker):/usr/bin/docker \
+            -v $(which docker):/usr/bin/docker \
             -p 8080:8080 -p 50000:50000 -p 9917:9917 \
             --name jenkins-master --rm terrych0u/jenkins-dind:alpine-lts-2.138.2
 ```
