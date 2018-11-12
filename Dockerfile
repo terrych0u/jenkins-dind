@@ -9,6 +9,6 @@ RUN apk update --no-cache \
     && rm -rf /var/cache/apk/* \
     && echo "%${USER} ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-USER jenkins
-COPY plugins.txt /usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
+# USER jenkins
+# COPY plugins.txt /usr/share/jenkins/plugins.txt
+# RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
